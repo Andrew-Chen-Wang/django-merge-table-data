@@ -23,3 +23,6 @@ class Blah(TestCase):
         except IntegrityError:
             ...
         assert WantedItem.objects.count() == 2, WantedItem.objects.count()
+        wanted_items = WantedItem.objects.filter(entity=e)
+        assert wanted_items[0].item != wanted_items[1].item
+

@@ -1,10 +1,12 @@
+from timeit import default_timer
 import os
+from random import sample
 
 from django.conf import settings
 from django.core.management.base import BaseCommand
 
 from public.models import (
-    ProposedItemArray, WantedItem, Entity, Item,# ProposedItem
+    ProposedItemArray, WantedItem, Entity, Item, ItemWithIndex
 )
 
 
@@ -34,8 +36,39 @@ class Command(BaseCommand):
         print("creating")
         words = [x.lower() for x in load_words()]
 
-        blah = [Item(name=x) for x in words[:100000]]
+        blah = [Item(name=x) for x in words]
         Item.objects.bulk_create(blah, batch_size=20000)
+
+        print("Timing filter")
+        ItemWithIndex.objects.bulk_create([ItemWithIndex(name=x) for x in words])
+
+        def timing(model, n):
+            times = []
+            iterations = 1000
+            for x in range(iterations):
+                # Get random words to filter on... maybe 100 and 1000 per
+                sampled = sample(words, k=n)
+                start = default_timer()
+                bool(model.objects.filter(name__in=sampled))
+                end = default_timer()
+                times.append(end - start)
+            return sum(times) / iterations
+
+        print(f"Timing for 100: {timing(Item, 100)}")
+        print(f"Timing for 1000: {timing(Item, 1000)}")
+        print(f"Timing for 10000: {timing(Item, 10000)}")
+        print(f"Timing for 100 w/ Index: {timing(ItemWithIndex, 100)}")
+        print(f"Timing for 1000 w/ Index: {timing(ItemWithIndex, 1000)}")
+        print(f"Timing for 10000 w/ Index: {timing(ItemWithIndex, 10000)}")
+
+        # print("Queryset explain 100:", Item.objects.filter(name__in=sample(words, k=100)).explain(analyze=True))
+        # print("Queryset explain 1000:", Item.objects.filter(name__in=sample(words, k=1000)).explain(analyze=True))
+        # print("Queryset explain 10000:", Item.objects.filter(name__in=sample(words, k=10000)).explain(analyze=True))
+        # print("Queryset explain 100 w/ Index:", ItemWithIndex.objects.filter(name__in=sample(words, k=100)).explain(analyze=True))
+        # print("Queryset explain 1000 w/ Index:", ItemWithIndex.objects.filter(name__in=sample(words, k=1000)).explain(analyze=True))
+        # print("Queryset explain 10000 w/ Index:", ItemWithIndex.objects.filter(name__in=sample(words, k=10000)).explain(analyze=True))
+
+        print("Creating test data")
         Entity.objects.bulk_create([Entity() for _ in range(1000)])
         entity = Entity.objects.first()
 

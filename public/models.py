@@ -11,6 +11,12 @@ class Item(models.Model):
     name = models.TextField()
 
 
+class ItemWithIndex(models.Model):
+    """Only testing filtering speed with this model"""
+    id = models.BigAutoField(primary_key=True)
+    name = models.TextField(db_index=True)
+
+
 class WantedItem(models.Model):
     id = models.BigAutoField(primary_key=True)
     item = models.ForeignKey(Item, on_delete=models.CASCADE)
