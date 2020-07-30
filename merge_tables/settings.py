@@ -81,7 +81,7 @@ if "TRAVIS" in os.environ:
             'ENGINE': 'django.db.backends.postgresql',
             'NAME': 'asdf',
             'USER': 'blah',
-            'PASSWORD': '',
+            'PASSWORD': 'blah',
             'PORT': "5433",
             'HOST': 'localhost'
         }
