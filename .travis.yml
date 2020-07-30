@@ -1,0 +1,24 @@
+os: linux
+dist: xenial
+
+language: python
+cache: pip
+python: 3.8
+
+addons:
+  postgresql: '12'
+  apt:
+    packages:
+      - postgresql-12
+      - postgresql-client-12
+env:
+  - PGVER=12
+  - PGPORT=5433
+
+install:
+  - pip install -r requirements.txt
+before_script:
+  - psql -c 'create database asdf;' -U postgres
+script:
+  - python manage.py test
+  - python manage.py create
