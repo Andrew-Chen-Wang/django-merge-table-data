@@ -21,7 +21,8 @@ jobs:
       install:
         - pip install -r requirements.txt
       before_script:
-        - psql -c 'create database asdf;'
+        - psql -c "CREATE ROLE blah LOGIN SUPERUSER;" -U postgres
+        - psql -c 'create database asdf;' -U blah
         - python manage.py migrate
       script:
         - python manage.py test
