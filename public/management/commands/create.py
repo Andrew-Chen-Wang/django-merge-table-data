@@ -61,12 +61,12 @@ class Command(BaseCommand):
         print(f"Timing for 1000 w/ Index: {timing(ItemWithIndex, 1000)}")
         print(f"Timing for 10000 w/ Index: {timing(ItemWithIndex, 10000)}")
 
-        # print("Queryset explain 100:", Item.objects.filter(name__in=sample(words, k=100)).explain(analyze=True))
-        # print("Queryset explain 1000:", Item.objects.filter(name__in=sample(words, k=1000)).explain(analyze=True))
-        # print("Queryset explain 10000:", Item.objects.filter(name__in=sample(words, k=10000)).explain(analyze=True))
-        # print("Queryset explain 100 w/ Index:", ItemWithIndex.objects.filter(name__in=sample(words, k=100)).explain(analyze=True))
-        # print("Queryset explain 1000 w/ Index:", ItemWithIndex.objects.filter(name__in=sample(words, k=1000)).explain(analyze=True))
-        # print("Queryset explain 10000 w/ Index:", ItemWithIndex.objects.filter(name__in=sample(words, k=10000)).explain(analyze=True))
+        print("Queryset explain 100:", Item.objects.filter(name__in=sample(words, k=100)).explain(analyze=True))
+        print("Queryset explain 1000:", Item.objects.filter(name__in=sample(words, k=1000)).explain(analyze=True))
+        print("Queryset explain 10000:", Item.objects.filter(name__in=sample(words, k=10000)).explain(analyze=True))
+        print("Queryset explain 100 w/ Index:", ItemWithIndex.objects.filter(name__in=sample(words, k=100)).explain(analyze=True))
+        print("Queryset explain 1000 w/ Index:", ItemWithIndex.objects.filter(name__in=sample(words, k=1000)).explain(analyze=True))
+        print("Queryset explain 10000 w/ Index:", ItemWithIndex.objects.filter(name__in=sample(words, k=10000)).explain(analyze=True))
 
         print("Creating test data")
         Entity.objects.bulk_create([Entity() for _ in range(1000)])
