@@ -75,15 +75,28 @@ WSGI_APPLICATION = 'merge_tables.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'asdf',
-        'USER': 'postgres',
-        'PORT': os.getenv("PGPORT", default="5432"),
-        'HOST': 'localhost'
+if "TRAVIS" in os.environ:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'asdf',
+            'USER': 'blah',
+            'PASSWORD': 'blah',
+            'PORT': "5433",
+            'HOST': 'localhost'
+        }
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'asdf',
+            'USER': 'postgres',
+            'PASSWORD': '',
+            'PORT': os.getenv("PGPORT", default="5432"),
+            'HOST': 'localhost'
+        }
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
