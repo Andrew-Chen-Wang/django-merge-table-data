@@ -80,6 +80,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'asdf',
         'USER': 'postgres',
+        'PASSWORD': '',
         'PORT': os.getenv("PGPORT", default="5432"),
         'HOST': 'localhost'
     }
