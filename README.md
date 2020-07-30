@@ -64,7 +64,7 @@ Execution Time: 92.734 ms
 
 ~~I don't think it's necessary to add an index, although this, for Donate Anything, is an automated system...~~
 
-SCRATCH THAT. Index ABSOLUTELY NEEDED. HOLY SHIT I had to just cancel the non indexed one with a lower iteration count... 4 HOURS like WTF. I'm tired. f this shit i'm out.
+SCRATCH THAT. Index ABSOLUTELY NEEDED. HOLY SHIT I had to just cancel the non indexed one with a lower iteration count... 4 MINUTES like WTF. I'm tired. f this shit i'm out.
 
 Basically, let's limit the new items to 1000. 10,000 would be deadly.
 
