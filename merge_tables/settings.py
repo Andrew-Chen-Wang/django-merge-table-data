@@ -82,7 +82,7 @@ if "TRAVIS" in os.environ:
             'NAME': 'asdf',
             'USER': 'blah',
             'PASSWORD': '',
-            'PORT': "5432",
+            'PORT': "5433",
             'HOST': 'localhost'
         }
     }
