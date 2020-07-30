@@ -75,9 +75,10 @@ WSGI_APPLICATION = 'merge_tables.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
+os.environ["DATABASE_URL"] = "postgres:///blah"
 if "TRAVIS" in os.environ:
     DATABASES = {
-        "default": "postgres:///blah"
+        "default": os.environ["DATABASE_URL"]
     }
 else:
     DATABASES = {
